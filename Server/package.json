@@ -9,5 +9,8 @@
   },
   "author": "seu1a",
   "license": "MIT",
-  "description": "아프리카TV 시청 중인 방송 정보와 디스코드 상태를 연동합니다"
+  "description": "아프리카TV 시청 중인 방송 정보와 디스코드 상태를 연동합니다",
+  "devDependencies": {
+    "@types/node": "^22.4.1"
+  }
 }
