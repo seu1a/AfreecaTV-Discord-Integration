@@ -2,6 +2,11 @@
   "name": "afreecatv-discord-integration-server",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
+  },
   "author": "seu1a",
   "license": "MIT",
   "description": "아프리카TV 시청 중인 방송 정보와 디스코드 상태를 연동합니다"
