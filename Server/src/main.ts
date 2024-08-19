@@ -1,51 +1,19 @@
-import http, { IncomingMessage, Server, ServerResponse } from "http";
+import RPCHandler from "./rpc";
+import HTTPServer from "./server";
 
-import { Client } from "@xhayper/discord-rpc";
+const RPC = new RPCHandler();
+const Server = new HTTPServer(RPC);
 
-const rpc: Client = new Client({
-  clientId: "1275040244995067914",
-});
-
-var ready = false;
-
-const setActivity = async (activity: any) => {
+Server.start(3000, () => {
   try {
-    rpc.user?.setActivity(activity);
+    RPC.client.on("ready", async () => {
+      Server.setReady();
+    });
   } catch (e) {
     console.error(e);
   }
-};
 
-const requestHandler = (req: IncomingMessage, res: ServerResponse) => {
-  if (ready !== true) {
-    res.write("fail");
-    res.end();
-    return;
-  }
-
-  if (req.url === "/") {
-    setActivity({
-      details: `booped times`,
-      state: "in slither party",
-      startTimestamp: Date.now(),
-      largeImageKey: "afreeca",
-      largeImageText: "아프리카TV",
-      type: 3,
-    });
-
-    res.write("success");
-    res.end();
-  }
-};
-
-const server: Server = http.createServer(requestHandler);
-
-server.listen(3000, () => {
-  rpc.on("ready", async () => {
-    ready = true;
-  });
-
-  rpc.login();
+  RPC.client.login();
 
   console.log("Server is listening on port 3000");
 });
