@@ -17,17 +17,29 @@ class RPCHandler implements RPCInterface {
     });
   }
 
-  public setActivity(activity: ActivityBody): void {
-    this.client.user?.setActivity({
-      details: `${activity.title}`,
-      state: `${activity.nickname} · ${activity.view}명`,
-      largeImageKey: "afreeca",
+  public async setActivity(activity: ActivityBody): Promise<void> {
+    await this.client.user?.setActivity({
+      details: `${activity.nickname} · ${activity.view}명 · 📺`,
+      state: `💫 · ${activity.title}`,
+      largeImageKey: `${activity.image}`,
+      smallImageKey: "afreeca",
+      smallImageText: "AfreecaTV",
       type: 3,
+      buttons: [
+        {
+          label: "방송 보러가기",
+          url: "https://www.afreecatv.com/",
+        },
+        {
+          label: "방송 보러가기",
+          url: "https://www.afreecatv.com/",
+        },
+      ],
     });
   }
 
-  public setDefaultActivity(): void {
-    this.client.user?.setActivity({
+  public async setDefaultActivity(): Promise<void> {
+    await this.client.user?.setActivity({
       details: "details",
       state: "state",
       largeImageKey: "afreeca",
