@@ -1,6 +1,7 @@
 import { IncomingMessage, ServerResponse } from "http";
 import RPCHandler from "./rpc";
 import http from "http";
+import ActivityBody from "./request/ActivityBody";
 
 interface ServerInterface {
   setReady(): void;
@@ -20,33 +21,72 @@ class HTTPServer implements ServerInterface {
     this.server = http.createServer(this.requestHandler);
   }
 
-  public setReady() {
+  public setReady(): void {
     this.ready = true;
   }
 
-  public setCORS(res: ServerResponse) {
+  public isReady(res: ServerResponse): boolean {
+    if (!this.ready) {
+      res.end("Server is not ready");
+      return false;
+    }
+
+    return true;
+  }
+
+  public setCORS(res: ServerResponse): void {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "*");
     res.setHeader("Access-Control-Allow-Headers", "*");
   }
 
-  public isReady(res: ServerResponse) {
-    if (!this.ready) {
-      res.end("Server is not ready");
-      return;
-    }
+  public parseBody(req: IncomingMessage): Promise<ActivityBody> {
+    return new Promise((resolve, reject) => {
+      let requestBody = "";
+
+      req.on("data", (chunk) => {
+        requestBody += chunk;
+      });
+
+      req.on("end", () => {
+        try {
+          const parsedBody: ActivityBody = JSON.parse(requestBody);
+          resolve(parsedBody);
+        } catch (error) {
+          reject(error);
+        }
+      });
+
+      req.on("error", (error) => {
+        reject(error);
+      });
+    });
   }
 
-  public requestHandler(req: IncomingMessage, res: ServerResponse) {
+  public async requestHandler(
+    req: IncomingMessage,
+    res: ServerResponse
+  ): Promise<void> {
     this.setCORS(res);
 
     this.isReady(res);
 
-    if (req.url === "/") {
+    if (req.url === "/" && req.method === "GET") {
       this.RPC.setDefaultActivity();
       res.end("ok");
+    } else if (req.url === "/" && req.method === "POST") {
+      let body = await this.parseBody(req);
+
+      this.RPC.setActivity({
+        details: `${body.title}`,
+        state: `${body.nickname} · ${body.view}명`,
+        largeImageKey: "afreeca",
+        type: 3,
+      });
+
+      res.end("ok");
     } else {
-      res.end("404 Not Found");
+      res.end("Not Found");
     }
   }
 
