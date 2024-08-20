@@ -76,14 +76,7 @@ class HTTPServer implements ServerInterface {
       res.end("ok");
     } else if (req.url === "/" && req.method === "POST") {
       let body = await this.parseBody(req);
-
-      this.RPC.setActivity({
-        details: `${body.title}`,
-        state: `${body.nickname} · ${body.view}명`,
-        largeImageKey: "afreeca",
-        type: 3,
-      });
-
+      this.RPC.setActivity(body);
       res.end("ok");
     } else {
       res.end("Not Found");
