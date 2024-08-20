@@ -24,6 +24,12 @@ class HTTPServer implements ServerInterface {
     this.ready = true;
   }
 
+  public setCORS(res: ServerResponse) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "*");
+    res.setHeader("Access-Control-Allow-Headers", "*");
+  }
+
   public isReady(res: ServerResponse) {
     if (!this.ready) {
       res.end("Server is not ready");
@@ -32,6 +38,8 @@ class HTTPServer implements ServerInterface {
   }
 
   public requestHandler(req: IncomingMessage, res: ServerResponse) {
+    this.setCORS(res);
+
     this.isReady(res);
 
     if (req.url === "/") {
