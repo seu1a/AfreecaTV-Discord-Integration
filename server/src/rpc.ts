@@ -1,4 +1,6 @@
-import { Client } from "@xhayper/discord-rpc";
+import { Client, SetActivityResponse } from "@xhayper/discord-rpc";
+import "dotenv/config";
+import ActivityBody from "./request/ActivityBody";
 
 interface RPCInterface {
   client: Client;
@@ -11,12 +13,17 @@ class RPCHandler implements RPCInterface {
 
   constructor() {
     this.client = new Client({
-      clientId: "1275040244995067914",
+      clientId: process.env.CLIENT_ID!,
     });
   }
 
-  public setActivity(activity: object): void {
-    this.client.user?.setActivity(activity);
+  public setActivity(activity: ActivityBody): void {
+    this.client.user?.setActivity({
+      details: `${activity.title}`,
+      state: `${activity.nickname} · ${activity.view}명`,
+      largeImageKey: "afreeca",
+      type: 3,
+    });
   }
 
   public setDefaultActivity(): void {
