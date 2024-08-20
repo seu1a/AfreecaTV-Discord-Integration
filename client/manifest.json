@@ -6,5 +6,17 @@
   "action": {
     "default_popup": "popup/popup.html",
     "default_icon": "assets/icon.png"
-  }
+  },
+  "permissions": ["tabs"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.afreecatv.com/*"],
+      "js": ["scripts/setDefaultActivity.js"]
+    },
+    {
+      "matches": ["https://play.afreecatv.com/*"],
+      "js": ["scripts/setActivity.js"],
+      "run_at": "document_end"
+    }
+  ]
 }
