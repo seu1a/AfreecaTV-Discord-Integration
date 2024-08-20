@@ -15,7 +15,7 @@ class RPCHandler implements RPCInterface {
     });
   }
 
-  public setActivity(activity: object) {
+  public setActivity(activity: object): void {
     this.client.user?.setActivity(activity);
   }
 
