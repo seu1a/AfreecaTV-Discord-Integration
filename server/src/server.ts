@@ -69,14 +69,16 @@ class HTTPServer implements ServerInterface {
   ): Promise<void> {
     this.setCORS(res);
 
-    this.isReady(res);
+    if (!this.isReady(res)) {
+      return;
+    }
 
     if (req.url === "/" && req.method === "GET") {
-      this.RPC.setDefaultActivity();
+      await this.RPC.setDefaultActivity();
       res.end("ok");
     } else if (req.url === "/" && req.method === "POST") {
       let body = await this.parseBody(req);
-      this.RPC.setActivity(body);
+      await this.RPC.setActivity(body);
       res.end("ok");
     } else {
       res.end("Not Found");
