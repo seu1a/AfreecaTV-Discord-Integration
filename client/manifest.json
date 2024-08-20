@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "AfreecaTV Discord Integration Client",
+  "description": "아프리카TV 시청 중인 방송 정보와 디스코드 상태를 연동합니다",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "assets/icon.png"
+  }
+}
