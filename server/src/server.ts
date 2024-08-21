@@ -73,12 +73,12 @@ class HTTPServer implements ServerInterface {
       return;
     }
 
-    if (req.url === "/" && req.method === "GET") {
-      await this.RPC.setDefaultActivity();
-      res.end("ok");
-    } else if (req.url === "/" && req.method === "POST") {
+    if (req.url === "/" && req.method === "POST") {
       let body = await this.parseBody(req);
       await this.RPC.setActivity(body);
+      res.end("ok");
+    } else if (req.url === "/clear" && req.method === "POST") {
+      await this.RPC.clearActivity();
       res.end("ok");
     } else {
       res.end("Not Found");
