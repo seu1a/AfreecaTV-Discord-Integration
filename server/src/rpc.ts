@@ -5,6 +5,7 @@ import ActivityBody from "./request";
 interface RPCInterface {
   client: Client;
   setActivity(activity: object): void;
+  clearActivity(): void;
 }
 
 class RPCHandler implements RPCInterface {
