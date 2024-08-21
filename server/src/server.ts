@@ -2,10 +2,9 @@ import { IncomingMessage, ServerResponse } from "http";
 import RPCHandler from "./rpc";
 import http from "http";
 import ActivityBody from "./request";
+import * as Ready from "./ready";
 
 interface ServerInterface {
-  setReady(): void;
-  isReady(res: ServerResponse): void;
   setCORS(res: ServerResponse): void;
   parseBody(req: IncomingMessage): Promise<ActivityBody>;
   requestHandler(req: IncomingMessage, res: ServerResponse): void;
@@ -14,26 +13,12 @@ interface ServerInterface {
 
 class HTTPServer implements ServerInterface {
   private RPC: RPCHandler;
-  private ready = false;
   private server: http.Server;
 
   constructor(RPC: RPCHandler) {
     this.RPC = RPC;
     this.requestHandler = this.requestHandler.bind(this);
     this.server = http.createServer(this.requestHandler);
-  }
-
-  public setReady(): void {
-    this.ready = true;
-  }
-
-  public isReady(res: ServerResponse): boolean {
-    if (!this.ready) {
-      res.end("Server is not ready");
-      return false;
-    }
-
-    return true;
   }
 
   public setCORS(res: ServerResponse): void {
@@ -70,18 +55,17 @@ class HTTPServer implements ServerInterface {
     res: ServerResponse
   ): Promise<void> {
     this.setCORS(res);
-
-    if (!this.isReady(res)) {
-      return;
+    if (!Ready.getReady()) {
+      this.RPC = new RPCHandler();
     }
 
     if (req.url === "/" && req.method === "POST") {
       let body = await this.parseBody(req);
       await this.RPC.setActivity(body);
-      res.end("ok");
+      res.end("OK");
     } else if (req.url === "/clear" && req.method === "POST") {
       await this.RPC.clearActivity();
-      res.end("ok");
+      res.end("OK");
     } else {
       res.end("Not Found");
     }
