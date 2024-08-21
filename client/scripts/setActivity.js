@@ -11,16 +11,16 @@ function sendData() {
   image = document.getElementsByClassName("thum")[0].src;
   url = window.location.href;
 
-  navigator.sendBeacon("http://localhost:3000/", {
-    method: "POST",
-    body: JSON.stringify({
+  navigator.sendBeacon(
+    "http://localhost:3000/",
+    JSON.stringify({
       nickname: nickname,
       title: title,
       view: view,
       image: image,
       url: url,
-    }),
-  });
+    })
+  );
 }
 
 let getViewer = setInterval(() => {
