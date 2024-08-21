@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from "http";
 import RPCHandler from "./rpc";
 import http from "http";
-import ActivityBody from "./request/ActivityBody";
+import ActivityBody from "./request";
 
 interface ServerInterface {
   setReady(): void;

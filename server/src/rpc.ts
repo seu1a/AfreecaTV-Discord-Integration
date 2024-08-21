@@ -1,6 +1,6 @@
 import { Client } from "@xhayper/discord-rpc";
 import "dotenv/config";
-import ActivityBody from "./request/ActivityBody";
+import ActivityBody from "./request";
 
 interface RPCInterface {
   client: Client;
