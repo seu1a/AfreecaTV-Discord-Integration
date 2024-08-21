@@ -1,10 +1,13 @@
 import RPCHandler from "./rpc";
 import HTTPServer from "./server";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const RPC = new RPCHandler();
 const Server = new HTTPServer(RPC);
 
-Server.start(3000, () => {
+Server.start(Number(process.env.PORT) ?? 3000, () => {
   try {
     RPC.client.on("ready", async () => {
       Server.setReady();
