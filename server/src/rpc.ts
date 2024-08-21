@@ -1,11 +1,10 @@
-import { Client, SetActivityResponse } from "@xhayper/discord-rpc";
+import { Client } from "@xhayper/discord-rpc";
 import "dotenv/config";
 import ActivityBody from "./request/ActivityBody";
 
 interface RPCInterface {
   client: Client;
   setActivity(activity: object): void;
-  setDefaultActivity(): void;
 }
 
 class RPCHandler implements RPCInterface {
@@ -27,24 +26,15 @@ class RPCHandler implements RPCInterface {
       type: 3,
       buttons: [
         {
-          label: "방송 보러가기",
-          url: "https://www.afreecatv.com/",
-        },
-        {
-          label: "방송 보러가기",
-          url: "https://www.afreecatv.com/",
+          label: "👋 같이 보기 ~ !",
+          url: `${activity.url}`,
         },
       ],
     });
   }
 
-  public async setDefaultActivity(): Promise<void> {
-    await this.client.user?.setActivity({
-      details: "details",
-      state: "state",
-      largeImageKey: "afreeca",
-      type: 3,
-    });
+  public async clearActivity(): Promise<void> {
+    await this.client.user?.clearActivity();
   }
 }
 
