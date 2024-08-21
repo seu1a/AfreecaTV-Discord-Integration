@@ -12,7 +12,7 @@ class RPCHandler implements RPCInterface {
 
   constructor() {
     this.client = new Client({
-      clientId: process.env.CLIENT_ID!,
+      clientId: process.env.CLIENT_ID ?? "1275040244995067914",
     });
   }
 
