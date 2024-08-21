@@ -3,6 +3,7 @@ interface ActivityBody {
   nickname: string;
   view: number;
   image: string;
+  url: string;
 }
 
 export default ActivityBody;
