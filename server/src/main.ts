@@ -13,7 +13,9 @@ Server.start(3000, () => {
     console.error(e);
   }
 
-  RPC.client.login();
+  RPC.client.login().catch((e) => {
+    console.log(e);
+  });
 
   console.log("Server is listening on port 3000");
 });
