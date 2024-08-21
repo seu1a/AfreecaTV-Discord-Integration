@@ -1,19 +1,28 @@
 import { Client } from "@xhayper/discord-rpc";
 import "dotenv/config";
 import ActivityBody from "./request";
+import * as Ready from "./ready";
 
 interface RPCInterface {
-  client: Client;
   setActivity(activity: object): void;
   clearActivity(): void;
+  destroy(): void;
 }
 
 class RPCHandler implements RPCInterface {
-  public client: Client;
+  private client: Client;
 
   constructor() {
     this.client = new Client({
       clientId: process.env.CLIENT_ID ?? "1275040244995067914",
+    });
+
+    this.client.once("ready", async () => {
+      Ready.setReady(true);
+    });
+
+    this.client.login().catch(() => {
+      this.client.destroy();
     });
   }
 
@@ -36,6 +45,12 @@ class RPCHandler implements RPCInterface {
 
   public async clearActivity(): Promise<void> {
     await this.client.user?.clearActivity();
+  }
+
+  public async destroy(): Promise<void> {
+    Ready.setReady(false);
+    await this.client.user?.clearActivity();
+    await this.client.destroy();
   }
 }
 
