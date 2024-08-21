@@ -6,6 +6,8 @@ import ActivityBody from "./request";
 interface ServerInterface {
   setReady(): void;
   isReady(res: ServerResponse): void;
+  setCORS(res: ServerResponse): void;
+  parseBody(req: IncomingMessage): Promise<ActivityBody>;
   requestHandler(req: IncomingMessage, res: ServerResponse): void;
   start(port: number, callback: () => void): void;
 }
