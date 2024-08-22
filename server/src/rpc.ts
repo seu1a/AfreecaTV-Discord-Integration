@@ -31,7 +31,7 @@ class RPCHandler implements RPCInterface {
       details: `${activity.nickname} · ${activity.view}명 · 📺`,
       state: `💫 · ${activity.title}`,
       largeImageKey: `${activity.image}`,
-      smallImageKey: "afreeca",
+      smallImageKey: "afreecatv-logo-transparent",
       smallImageText: "AfreecaTV",
       type: 3,
       buttons: [
