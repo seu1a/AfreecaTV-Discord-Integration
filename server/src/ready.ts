@@ -1,10 +1,10 @@
 let ready = false;
 
-function setReady(status: boolean) {
+async function setReady(status: boolean) {
   ready = status;
 }
 
-function getReady() {
+async function getReady() {
   return ready;
 }
 
