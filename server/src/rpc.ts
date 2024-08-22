@@ -3,31 +3,30 @@ import "dotenv/config";
 import ActivityBody from "./request";
 import * as Ready from "./ready";
 
-interface RPCInterface {
-  setActivity(activity: object): void;
-  clearActivity(): void;
-  destroy(): void;
-}
+class RPCHandler {
+  private static client: Client;
 
-class RPCHandler implements RPCInterface {
-  private client: Client;
-
-  constructor() {
-    this.client = new Client({
+  public static async connnect() {
+    RPCHandler.client = new Client({
       clientId: process.env.CLIENT_ID ?? "1275040244995067914",
     });
 
-    this.client.once("ready", async () => {
+    RPCHandler.client.once("ready", async () => {
       Ready.setReady(true);
     });
 
-    this.client.login().catch(() => {
-      this.client.destroy();
+    RPCHandler.client.login().catch(() => {
+      RPCHandler.client.destroy();
     });
   }
 
-  public async setActivity(activity: ActivityBody): Promise<void> {
-    await this.client.user?.setActivity({
+  public static async reconnect() {
+    RPCHandler.destroy();
+    RPCHandler.connnect();
+  }
+
+  public static async setActivity(activity: ActivityBody) {
+    await RPCHandler.client.user?.setActivity({
       details: `${activity.nickname} · ${activity.view}명 · 📺`,
       state: `💫 · ${activity.title}`,
       largeImageKey: `${activity.image}`,
@@ -43,14 +42,14 @@ class RPCHandler implements RPCInterface {
     });
   }
 
-  public async clearActivity(): Promise<void> {
-    await this.client.user?.clearActivity();
+  public static async clearActivity() {
+    await RPCHandler.client.user?.clearActivity();
   }
 
-  public async destroy(): Promise<void> {
+  public static async destroy(): Promise<void> {
     Ready.setReady(false);
-    await this.client.user?.clearActivity();
-    await this.client.destroy();
+    await RPCHandler.client.user?.clearActivity();
+    await RPCHandler.client.destroy();
   }
 }
 
