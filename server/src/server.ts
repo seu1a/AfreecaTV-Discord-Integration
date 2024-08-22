@@ -13,12 +13,12 @@ interface ServerInterface {
 
 class HTTPServer implements ServerInterface {
   private RPC: RPCHandler;
-  private server: http.Server;
+  private Server: http.Server;
 
   constructor(RPC: RPCHandler) {
     this.RPC = RPC;
     this.requestHandler = this.requestHandler.bind(this);
-    this.server = http.createServer(this.requestHandler);
+    this.Server = http.createServer(this.requestHandler);
   }
 
   public setCORS(res: ServerResponse): void {
@@ -72,7 +72,7 @@ class HTTPServer implements ServerInterface {
   }
 
   public start(port: number, callback: () => void) {
-    this.server.listen(port, callback);
+    this.Server.listen(port, callback);
   }
 }
 
