@@ -12,22 +12,20 @@ interface ServerInterface {
 }
 
 class HTTPServer implements ServerInterface {
-  private RPC: RPCHandler;
   private Server: http.Server;
 
-  constructor(RPC: RPCHandler) {
-    this.RPC = RPC;
+  constructor() {
     this.requestHandler = this.requestHandler.bind(this);
     this.Server = http.createServer(this.requestHandler);
   }
 
-  public setCORS(res: ServerResponse): void {
+  public async setCORS(res: ServerResponse) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "*");
     res.setHeader("Access-Control-Allow-Headers", "*");
   }
 
-  public parseBody(req: IncomingMessage): Promise<ActivityBody> {
+  public async parseBody(req: IncomingMessage): Promise<ActivityBody> {
     return new Promise((resolve, reject) => {
       let requestBody = "";
 
@@ -56,15 +54,15 @@ class HTTPServer implements ServerInterface {
   ): Promise<void> {
     this.setCORS(res);
     if (!Ready.getReady()) {
-      this.RPC = new RPCHandler();
+      await RPCHandler.reconnect();
     }
 
     if (req.url === "/" && req.method === "POST") {
       let body = await this.parseBody(req);
-      await this.RPC.setActivity(body);
+      await RPCHandler.setActivity(body);
       res.end("OK");
     } else if (req.url === "/clear" && req.method === "POST") {
-      await this.RPC.clearActivity();
+      await RPCHandler.clearActivity();
       res.end("OK");
     } else {
       res.end("Not Found");
