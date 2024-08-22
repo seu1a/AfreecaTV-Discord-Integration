@@ -1,4 +1,5 @@
 import { app, Menu, nativeImage, Tray } from "electron";
+import RPCHandler from "./rpc";
 
 class MenuBar {
   public tray: Tray;
@@ -22,6 +23,11 @@ class MenuBar {
 
   createMenu(): Menu {
     const contextMenu = Menu.buildFromTemplate([
+      {
+        label: "재연결",
+        type: "normal",
+        click: () => RPCHandler.reconnect(),
+      },
       {
         label: "종료",
         type: "normal",
