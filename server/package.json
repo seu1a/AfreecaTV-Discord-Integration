@@ -1,16 +1,18 @@
 {
-  "name": "afreecatv-discordrpc-integration-server",
+  "name": "afreecatv-discord-integration-server",
   "version": "1.0.0",
-  "description": "AfreecaTV Discord Rich Presence Integration Server",
+  "description": "📺 · 시청 중인 방송 정보와 디스코드 상태를 연동합니다",
   "author": "seu1a",
   "scripts": {
     "start": "electron .",
     "dev": "npm run dist && electron .",
-    "build": "npm run dist && electron-builder -mwl",
+    "build": "npm run dist && electron-builder -mw",
     "dist": "tsc --build"
   },
   "main": "dist/main.js",
   "build": {
+    "productName": "AfreecaTV Discord Integration Server",
+    "appId": "kr.seula.afreecatv-discord-integration-server",
     "directories": {
       "output": "build"
     }
