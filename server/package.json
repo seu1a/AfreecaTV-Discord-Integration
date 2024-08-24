@@ -15,6 +15,23 @@
     "appId": "kr.seula.afreecatv-discord-integration-server",
     "directories": {
       "output": "build"
+    },
+    "mac": {
+      "target": {
+        "target": "dmg",
+        "arch": [
+          "universal"
+        ]
+      }
+    },
+    "win": {
+      "target": {
+        "target": "nsis",
+        "arch": [
+          "arm64",
+          "x64"
+        ]
+      }
     }
   },
   "devDependencies": {
