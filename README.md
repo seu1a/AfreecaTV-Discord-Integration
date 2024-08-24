@@ -6,16 +6,12 @@
 
 [공식 홈페이지 접속하기](https://ada.juu.kr) | [JuuKR 디스코드 참가하기](https://discord.gg/HGJfmtf678)
 
----
-
 ### 특징 · Feature
 
 - **auto-startup**: PC 시작 시 서버 프로그램이 자동적 실행됩니다.
 - **auto-upgrade**: 확장과 서버 프로그램이 한 번의 설치로 통해 자동 업그레이드됩니다.
 - **realtime-update**: 방송 제목의 변경, 시청자 수의 변동이 감지되면 자동으로 업데이트됩니다.
 - **full-customizable**: 활동에 포함되는 모든 요소를 자유롭게 커스텀 할 수 있습니다.
-
----
 
 ### 사용 · Usage
 
@@ -27,13 +23,9 @@
 
 3. [아프리카TV](https://afreecatv.com) 방송에 접속하여 정상적으로 표시되는지 확인합니다.
 
----
-
 ### 예시 · Example
 
 <img src="https://raw.githubusercontent.com/seu1a/AfreecaTV-Discord-Integration/develop/.github/assets/example_1.png" width="300" /> <img src="https://raw.githubusercontent.com/seu1a/AfreecaTV-Discord-Integration/develop/.github/assets/example_2.png" width="300" />
-
----
 
 ### 빌드 · Build
 
