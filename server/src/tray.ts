@@ -5,7 +5,7 @@ class MenuBar {
   public tray: Tray;
 
   constructor() {
-    app.dock.hide(); // 맥의 Dock 아이콘 숨기기
+    app.dock.hide();
     app.setLoginItemSettings({ openAtLogin: true });
 
     this.tray = new Tray(this.createNativeImage());

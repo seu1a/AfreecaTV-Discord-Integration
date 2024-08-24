@@ -7,6 +7,8 @@ import MenuBar from "./tray";
 
 dotenv.config();
 
+const locked = app.requestSingleInstanceLock();
+
 const Server = new HTTPServer();
 
 const appElements: any = {
@@ -14,10 +16,14 @@ const appElements: any = {
   windows: [],
 };
 
-app.on("ready", () => {
-  appElements.tray = new MenuBar();
+if (!locked) {
+  app.quit();
+} else {
+  app.on("ready", () => {
+    appElements.tray = new MenuBar();
 
-  Server.start(process.env.PORT ? Number(process.env.PORT) : 3000, () => {
-    RPCHandler.connnect();
+    Server.start(process.env.PORT ? Number(process.env.PORT) : 3000, () => {
+      RPCHandler.connnect();
+    });
   });
-});
+}
