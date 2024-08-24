@@ -15,7 +15,7 @@
 
 ### 사용 · Usage
 
-> 지원 OS: macOS Ventura 이상, Windows 10 이상
+> 지원 OS: **macOS x64** (Intel), **macOS arm64** (Apple Silicon), **Windows x64**, **Windows arm64**
 
 1. [크롬 웹 스토어](https://chromewebstore.google.com/detail/afreecatv-discord-integra/aandnmofckmnajlbflkphcmkcnlkigff?hl=ko)에서 **AfreecaTV Discord Integration Client** 확장을 설치합니다.
 
