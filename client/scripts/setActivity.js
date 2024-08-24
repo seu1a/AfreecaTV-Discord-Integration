@@ -27,8 +27,6 @@ let getViewer = setInterval(() => {
   view = document.getElementById("nAllViewer").innerText;
   image = document.getElementsByClassName("thum")[0].src;
 
-  console.log(view, image);
-
   if (
     parseInt(view) > 0 &&
     image != "https://res.afreecatv.com/images/afmain/img_thumb_profile.gif"
