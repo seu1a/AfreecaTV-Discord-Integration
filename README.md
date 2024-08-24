@@ -19,7 +19,7 @@
 
 1. [크롬 웹 스토어](https://chromewebstore.google.com/detail/afreecatv-discord-integra/aandnmofckmnajlbflkphcmkcnlkigff?hl=ko)에서 **AfreecaTV Discord Integration Client** 확장을 설치합니다.
 
-2. [릴리즈 탭](<[https://](https://github.com/seu1a/AfreecaTV-Discord-Integration/releases)>)에서 최신 버전의 서버 프로그램을 다운로드하고 설치합니다.
+2. [릴리즈 탭](https://github.com/seu1a/AfreecaTV-Discord-Integration/releases)에서 최신 버전의 서버 프로그램을 다운로드하고 설치합니다.
 
 3. [아프리카TV](https://afreecatv.com) 방송에 접속하여 정상적으로 표시되는지 확인합니다.
 
