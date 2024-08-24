@@ -25,7 +25,8 @@
 
 ### 예시 · Example
 
-![example_1.png](https://raw.githubusercontent.com/seu1a/AfreecaTV-Discord-Integration/develop/.github/assets/example_1.png) ![example_2.png](https://raw.githubusercontent.com/seu1a/AfreecaTV-Discord-Integration/develop/.github/assets/example_2.png) ![example_3.png
+<img src="https://raw.githubusercontent.com/seu1a/AfreecaTV-Discord-Integration/develop/.github/assets/example_1.png" width="300" />
+<img src="https://raw.githubusercontent.com/seu1a/AfreecaTV-Discord-Integration/develop/.github/assets/example_2.png" width="300" />
 
 ### 빌드 · Build
 
@@ -43,7 +44,7 @@
 
 `npm install`
 
-4. 코드 수정 후 아래 명령어로 **수정된 코드를 실행**할 수 있습니다.
+1. 아래 명령어로 **수정된 코드를 실행** 할 수 있습니다.
 
 `npm run dev`
 
