@@ -25,8 +25,7 @@
 
 ### 예시 · Example
 
-<img src="https://raw.githubusercontent.com/seu1a/AfreecaTV-Discord-Integration/develop/.github/assets/example_1.png" width="300" />
-<img src="https://raw.githubusercontent.com/seu1a/AfreecaTV-Discord-Integration/develop/.github/assets/example_2.png" width="300" />
+<img src="https://raw.githubusercontent.com/seu1a/AfreecaTV-Discord-Integration/develop/.github/assets/example_1.png" width="300" /> <img src="https://raw.githubusercontent.com/seu1a/AfreecaTV-Discord-Integration/develop/.github/assets/example_2.png" width="300" />
 
 ### 빌드 · Build
 
